@@ -7,9 +7,9 @@ const client = new OpenAI({
 
 async function generateCareerRoadmap(data) {
   const prompt = `
-You are an expert career mentor, curriculum designer, and technical hiring advisor.
+You are an expert career mentor and curriculum designer.
 
-Create a personalized career roadmap for the following user.
+Create a highly personalized career roadmap for this user.
 
 USER INFORMATION:
 Name: ${data.name || ""}
@@ -21,43 +21,17 @@ Experience Level: ${data.experience || ""}
 Hours Per Day: ${data.hoursPerDay || ""}
 Timeline: ${data.timeline || ""}
 
-IMPORTANT REQUIREMENTS:
+IMPORTANT:
+- Make the roadmap specific to the user's target career.
+- Consider the user's current skills and experience.
+- Consider the available hours per day.
+- Make the timeline realistic.
+- Avoid generic advice.
+- Return ONLY valid JSON.
+- Do NOT use Markdown.
+- Do NOT put JSON inside code fences.
 
-1. The roadmap MUST contain EXACTLY 6 months.
-2. Each month MUST contain EXACTLY 4 weeks.
-3. Therefore, the roadmap MUST contain EXACTLY 24 weeks.
-4. Every week MUST contain:
-   - topics
-   - practice
-   - resources
-   - deliverable
-5. Every month MUST contain:
-   - month
-   - title
-   - goal
-   - technologies
-   - weeks
-   - project
-6. Adapt the difficulty to the user's current skills and experience.
-7. Adapt the workload to the user's available hours per day.
-8. Do not give generic advice.
-9. Make the roadmap practical and job-oriented.
-10. Include realistic projects that progressively increase in difficulty.
-11. The final month must include:
-    - deployment
-    - testing
-    - Git/GitHub
-    - resume preparation
-    - interview preparation
-    - portfolio preparation
-    - job application preparation
-12. Do not recommend obsolete platforms or technologies when modern alternatives are available.
-13. Keep resources concise. Use well-known resources such as official documentation, MDN, freeCodeCamp, official framework documentation, etc.
-14. Do not include markdown.
-15. Do not include explanations outside the JSON.
-16. Return ONLY valid JSON.
-
-REQUIRED JSON STRUCTURE:
+Return exactly this JSON structure:
 
 {
   "career": "",
@@ -117,226 +91,6 @@ REQUIRED JSON STRUCTURE:
         "features": [],
         "deliverables": []
       }
-    },
-
-    {
-      "month": 2,
-      "title": "",
-      "goal": "",
-      "technologies": [],
-      "weeks": [
-        {
-          "week": 1,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 2,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 3,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 4,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        }
-      ],
-      "project": {
-        "title": "",
-        "description": "",
-        "skills": [],
-        "features": [],
-        "deliverables": []
-      }
-    },
-
-    {
-      "month": 3,
-      "title": "",
-      "goal": "",
-      "technologies": [],
-      "weeks": [
-        {
-          "week": 1,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 2,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 3,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 4,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        }
-      ],
-      "project": {
-        "title": "",
-        "description": "",
-        "skills": [],
-        "features": [],
-        "deliverables": []
-      }
-    },
-
-    {
-      "month": 4,
-      "title": "",
-      "goal": "",
-      "technologies": [],
-      "weeks": [
-        {
-          "week": 1,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 2,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 3,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 4,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        }
-      ],
-      "project": {
-        "title": "",
-        "description": "",
-        "skills": [],
-        "features": [],
-        "deliverables": []
-      }
-    },
-
-    {
-      "month": 5,
-      "title": "",
-      "goal": "",
-      "technologies": [],
-      "weeks": [
-        {
-          "week": 1,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 2,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 3,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 4,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        }
-      ],
-      "project": {
-        "title": "",
-        "description": "",
-        "skills": [],
-        "features": [],
-        "deliverables": []
-      }
-    },
-
-    {
-      "month": 6,
-      "title": "",
-      "goal": "",
-      "technologies": [],
-      "weeks": [
-        {
-          "week": 1,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 2,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 3,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        },
-        {
-          "week": 4,
-          "topics": [],
-          "practice": [],
-          "resources": [],
-          "deliverable": ""
-        }
-      ],
-      "project": {
-        "title": "",
-        "description": "",
-        "skills": [],
-        "features": [],
-        "deliverables": []
-      }
     }
   ],
 
@@ -358,18 +112,20 @@ REQUIRED JSON STRUCTURE:
   ]
 }
 
-FINAL VALIDATION BEFORE RESPONDING:
+IMPORTANT OUTPUT REQUIREMENTS:
 
-- months.length MUST equal 6.
-- months[0].month MUST equal 1.
-- months[1].month MUST equal 2.
-- months[2].month MUST equal 3.
-- months[3].month MUST equal 4.
-- months[4].month MUST equal 5.
-- months[5].month MUST equal 6.
-- Every months[i].weeks.length MUST equal 4.
-- Every week must contain topics, practice, resources and deliverable.
-- Return valid JSON only.
+1. The "months" array must contain exactly 6 months.
+2. Each month must contain exactly 4 weeks.
+3. Each week must contain:
+   - topics
+   - practice
+   - resources
+   - deliverable
+4. Each month must contain one project.
+5. Include interview preparation.
+6. Include final portfolio projects.
+7. Keep the content realistic for the user's available time.
+8. Return valid JSON only.
 `;
 
   try {
@@ -380,7 +136,7 @@ FINAL VALIDATION BEFORE RESPONDING:
         {
           role: "system",
           content:
-            "You are a strict JSON API. Return ONLY valid JSON. Never return markdown, code fences, comments, or explanatory text.",
+            "You are an expert career roadmap generator. Return ONLY valid JSON. Never return Markdown.",
         },
         {
           role: "user",
@@ -398,56 +154,69 @@ FINAL VALIDATION BEFORE RESPONDING:
     const content = response.choices?.[0]?.message?.content;
 
     if (!content) {
-      throw new Error("AI returned an empty response");
+      throw new Error("AI returned an empty response.");
     }
 
-    const roadmap = JSON.parse(content);
+    console.log("AI response received successfully.");
 
-    // Server-side validation
+    let roadmap;
+
+    try {
+      roadmap = JSON.parse(content);
+    } catch (parseError) {
+      console.error("JSON PARSE ERROR:", parseError);
+      console.error("RAW AI RESPONSE:", content);
+
+      throw new Error("AI returned invalid JSON.");
+    }
+
+    // Basic validation
+    if (!roadmap || typeof roadmap !== "object") {
+      throw new Error("AI response is not a valid object.");
+    }
+
+    if (!roadmap.career) {
+      roadmap.career = data.targetCareer || "Career Roadmap";
+    }
+
+    if (!roadmap.summary) {
+      roadmap.summary =
+        "A personalized career roadmap based on the user's goals, skills, experience, and available time.";
+    }
+
+    if (!Array.isArray(roadmap.skillGap)) {
+      roadmap.skillGap = [];
+    }
+
     if (!Array.isArray(roadmap.months)) {
-      throw new Error("AI response does not contain months");
+      roadmap.months = [];
     }
 
-    if (roadmap.months.length !== 6) {
-      throw new Error(
-        `AI generated ${roadmap.months.length} months instead of 6`,
+    if (!Array.isArray(roadmap.interviewPreparation)) {
+      roadmap.interviewPreparation = [];
+    }
+
+    if (!Array.isArray(roadmap.finalProjects)) {
+      roadmap.finalProjects = [];
+    }
+
+    console.log("AI generated months:", roadmap.months.length);
+
+    roadmap.months.forEach((month, index) => {
+      console.log(
+        `Month ${index + 1} weeks:`,
+        Array.isArray(month.weeks) ? month.weeks.length : 0,
       );
-    }
-
-    for (let i = 0; i < 6; i++) {
-      const month = roadmap.months[i];
-
-      if (month.month !== i + 1) {
-        throw new Error(`Invalid month number at position ${i + 1}`);
-      }
-
-      if (!Array.isArray(month.weeks) || month.weeks.length !== 4) {
-        throw new Error(`Month ${i + 1} must contain exactly 4 weeks`);
-      }
-
-      for (let j = 0; j < 4; j++) {
-        const week = month.weeks[j];
-
-        if (
-          !Array.isArray(week.topics) ||
-          !Array.isArray(week.practice) ||
-          !Array.isArray(week.resources) ||
-          typeof week.deliverable !== "string"
-        ) {
-          throw new Error(
-            `Month ${i + 1}, Week ${j + 1} has an invalid structure`,
-          );
-        }
-      }
-    }
+    });
 
     return roadmap;
   } catch (error) {
-    console.error("AI ERROR:", error);
+    console.error("=================================");
+    console.error("AI ERROR:");
+    console.error(error);
+    console.error("=================================");
 
-    throw new Error(
-      "Failed to generate a complete career roadmap. Please try again.",
-    );
+    throw error;
   }
 }
 
