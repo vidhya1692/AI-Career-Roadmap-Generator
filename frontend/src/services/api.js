@@ -1,10 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: "https://ai-career-roadmap-generator-zx2p.onrender.com/api",
 });
 
 export default API;
