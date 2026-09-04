@@ -9,7 +9,7 @@ async function generateCareerRoadmap(data) {
   const prompt = `
 You are an expert career mentor and curriculum designer.
 
-Create a highly personalized career roadmap for this user.
+Create a practical, personalized 6-month career roadmap.
 
 USER INFORMATION:
 Name: ${data.name || ""}
@@ -21,22 +21,22 @@ Experience Level: ${data.experience || ""}
 Hours Per Day: ${data.hoursPerDay || ""}
 Timeline: ${data.timeline || ""}
 
-IMPORTANT:
-- Make the roadmap specific to the user's target career.
-- Consider the user's current skills and experience.
-- Consider the available hours per day.
-- Make the timeline realistic.
+RULES:
+- Make the roadmap specific to the target career.
+- Consider current skills and experience.
+- Respect the user's available hours per day.
+- Make the plan realistic.
 - Avoid generic advice.
+- Keep descriptions concise.
 - Return ONLY valid JSON.
 - Do NOT use Markdown.
-- Do NOT put JSON inside code fences.
+- Do NOT use code fences.
 
-Return exactly this JSON structure:
+Return exactly this structure:
 
 {
   "career": "",
   "summary": "",
-
   "skillGap": [
     {
       "skill": "",
@@ -45,14 +45,12 @@ Return exactly this JSON structure:
       "priority": "High"
     }
   ],
-
   "months": [
     {
       "month": 1,
       "title": "",
       "goal": "",
       "technologies": [],
-
       "weeks": [
         {
           "week": 1,
@@ -83,7 +81,6 @@ Return exactly this JSON structure:
           "deliverable": ""
         }
       ],
-
       "project": {
         "title": "",
         "description": "",
@@ -93,7 +90,6 @@ Return exactly this JSON structure:
       }
     }
   ],
-
   "interviewPreparation": [
     {
       "topic": "",
@@ -101,7 +97,6 @@ Return exactly this JSON structure:
       "practice": []
     }
   ],
-
   "finalProjects": [
     {
       "title": "",
@@ -112,40 +107,34 @@ Return exactly this JSON structure:
   ]
 }
 
-IMPORTANT OUTPUT REQUIREMENTS:
-
-1. The "months" array must contain exactly 6 months.
-2. Each month must contain exactly 4 weeks.
-3. Each week must contain:
-   - topics
-   - practice
-   - resources
-   - deliverable
-4. Each month must contain one project.
+STRICT REQUIREMENTS:
+1. months MUST contain exactly 6 months.
+2. Each month MUST contain exactly 4 weeks.
+3. Each week MUST contain topics, practice, resources and deliverable.
+4. Each month MUST contain exactly one project.
 5. Include interview preparation.
 6. Include final portfolio projects.
-7. Keep the content realistic for the user's available time.
-8. Return valid JSON only.
+7. Keep arrays concise.
+8. Do not generate unnecessary text.
+9. Return valid JSON only.
 `;
 
   try {
     const response = await client.chat.completions.create({
       model: "openai/gpt-oss-120b",
-
       messages: [
         {
           role: "system",
           content:
-            "You are an expert career roadmap generator. Return ONLY valid JSON. Never return Markdown.",
+            "You are an expert career roadmap generator. Return ONLY valid JSON.",
         },
         {
           role: "user",
           content: prompt,
         },
       ],
-
-      temperature: 0.4,
-
+      temperature: 0.3,
+      max_tokens: 5000,
       response_format: {
         type: "json_object",
       },
@@ -166,11 +155,9 @@ IMPORTANT OUTPUT REQUIREMENTS:
     } catch (parseError) {
       console.error("JSON PARSE ERROR:", parseError);
       console.error("RAW AI RESPONSE:", content);
-
       throw new Error("AI returned invalid JSON.");
     }
 
-    // Basic validation
     if (!roadmap || typeof roadmap !== "object") {
       throw new Error("AI response is not a valid object.");
     }
@@ -213,6 +200,12 @@ IMPORTANT OUTPUT REQUIREMENTS:
   } catch (error) {
     console.error("=================================");
     console.error("AI ERROR:");
+
+    if (error.status === 429) {
+      console.error("GROQ RATE LIMIT REACHED");
+      console.error("Please wait and try again later.");
+    }
+
     console.error(error);
     console.error("=================================");
 
